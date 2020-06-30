@@ -1,28 +1,25 @@
 @startuml
 class Dice {
 }
+
 class Player {
 }
 
-class Token {
+class Game {
 }
 
-Player -> Token
+GameConroller -> Player
+Game --> Dice
+GameConroller --> Game
 
-class HandleHand {
-}
 
- GameConroller -> Player
- GameConroller -> Dice
- GameConroller --> HandleHand
-
-class PreGame {
-}
 Class Game {
 }
 
- HandleHand -> PreGame
- HandleHand -> Game
+Class Phase {
+}
+
+Game ->  Phase
 
 Class GameConroller {
 }
