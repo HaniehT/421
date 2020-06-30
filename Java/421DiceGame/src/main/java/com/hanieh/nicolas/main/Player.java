@@ -2,16 +2,16 @@ package com.hanieh.nicolas.main;
 
 public class Player {
 	
-	private String nomPlayer;
+	private String name;
 	private int numberTokens;
 	
 	public Player (String nomPlayer, int numberTokens) {
-		this.nomPlayer = nomPlayer;
+		this.name = nomPlayer;
 		this.numberTokens = numberTokens;
 	}
 	
-	public String getNomPlayer() {
-		return nomPlayer;
+	public String getName() {
+		return name;
 	}
 	
 	public int getNumberOfToken() {
