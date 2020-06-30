@@ -1,3 +1,38 @@
 @startuml
-Alice -> Bob: test
+class Dice {
+}
+class Player {
+}
+
+class Token {
+}
+
+Player -> Token
+
+class HandleHand {
+}
+
+ GameConroller -> Player
+ GameConroller -> Dice
+ GameConroller --> HandleHand
+
+class PreGame {
+}
+Class Game {
+}
+
+ HandleHand -> PreGame
+ HandleHand -> Game
+
+Class GameConroller {
+}
+Class Input {
+}
+Class OutPut {
+}
+
+
+ GameConroller --> Input
+ GameConroller --> OutPut
+
 @enduml
