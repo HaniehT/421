@@ -17,10 +17,20 @@ public class GameTests {
 	
 	@Test
 	public void nomPlayer() {
-		Player Hanieh = new Player("Hanieh");
-		Player Nicolas = new Player("Nicolas");
+		Player Hanieh = new Player("Hanieh", 2);
+		Player Nicolas = new Player("Nicolas", 4);
 		
 		assertEquals("Hanieh", Hanieh.getNomPlayer());
+	}
+	
+	@Test
+	public void numberTokenByPlayer() {
+		
+		Player Hanieh = new Player("Hanieh", 6);
+		Player Nicolas = new Player("Nicolas", 8);
+		
+		assertEquals(6, Hanieh.getNumberOfToken());
+		assertEquals(8, Nicolas.getNumberOfToken());
 	}
 	
 	
