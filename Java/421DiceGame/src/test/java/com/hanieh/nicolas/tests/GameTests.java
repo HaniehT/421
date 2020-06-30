@@ -17,7 +17,7 @@ public class GameTests {
 	
 	@Test
 	public void nomPlayer() {
-		Player hanieh = new Player("Hanieh", 2);
+		Player hanieh = new Player("Hanieh");
 		
 		assertEquals("Hanieh", hanieh.getName());
 	}
@@ -55,5 +55,7 @@ public class GameTests {
 		Game threePlayerGame = new Game(new Player("Hanieh"), new Player("Nicolas"), new Player("player3"));
 		assertEquals(3, game.numberOfusers());
 	}
+	
+	
 	
 }
