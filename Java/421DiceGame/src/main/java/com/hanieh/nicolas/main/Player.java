@@ -3,12 +3,14 @@ package com.hanieh.nicolas.main;
 public class Player {
 	
 	private String name;
-	private int numberTokens;
+	private int numberTokens = 0;
+
 	
-	public Player (String nomPlayer, int numberTokens) {
+	public Player (String nomPlayer) {
 		this.name = nomPlayer;
-		this.numberTokens = numberTokens;
 	}
+	
+
 	
 	public String getName() {
 		return name;

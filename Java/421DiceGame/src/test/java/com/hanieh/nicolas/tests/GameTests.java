@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 import com.hanieh.nicolas.main.Dice;
+import com.hanieh.nicolas.main.Game;
 import com.hanieh.nicolas.main.Player;
 
 public class GameTests {
@@ -22,38 +23,28 @@ public class GameTests {
 		assertEquals("Hanieh", hanieh.getName());
 	}
 	
-	@Test
-	// Pas bon cela, car tu sais pas le nombre de token suivant le jeu
-	/*
-	public void numberTokenByPlayer() {
-		
-		Player Hanieh = new Player("Hanieh", 6);
-		Player Nicolas = new Player("Nicolas", 8);
-		
-		assertEquals(6, Hanieh.getNumberOfToken());
-		assertEquals(8, Nicolas.getNumberOfToken());
-	}
-	*/
 	
+	@Test
 	public void newPlayerShouldHaveZeroToken() {
 		Player hanieh = new Player("Hanieh");
-		assertEquals(0, hanieh.getToken());
+		assertEquals(0, hanieh.getNumberOfToken());
 	}
 	
 	// Puis prochain test - 
 	//The number of player is two, three. We will use 15 tokens for point.
-	
+	@Test
 	public void newGameShouldStartWithFiftenTokenToDistribute() {
 		Game game = new Game();
 		assertEquals(15, game.tokenToDistribute());
 	}
 	
+	@Test
 	public void newGameShouldhaveTwoorThreePlayer() {
 		Game twoPlayerGame = new Game(new Player("Hanieh"), new Player("Nicolas"));
-		assertEquals(2, game.numberOfusers());
+		assertEquals(2, twoPlayerGame.numberOfusers());
 		
 		Game threePlayerGame = new Game(new Player("Hanieh"), new Player("Nicolas"), new Player("player3"));
-		assertEquals(3, game.numberOfusers());
+		assertEquals(3, threePlayerGame.numberOfusers());
 	}
 	
 	
