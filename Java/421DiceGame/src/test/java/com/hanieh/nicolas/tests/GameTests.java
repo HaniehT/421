@@ -1,6 +1,8 @@
 package com.hanieh.nicolas.tests;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.jupiter.api.Test;
 
@@ -47,13 +49,50 @@ public class GameTests {
 		assertEquals(3, threePlayerGame.numberOfusers());
 	}
 
+	/*
 	@Test
 	public void LancerDice() {
-
 		Game game = new Game();
-		
-
 		System.out.println(game.Play());
 	
 	}
+	*/
+	
+	// Each time a player plays, we have a combination of 3 Dice
+	// 1 -> A play should return a combination of 3 dice
+	// 
+	
+	@Test
+	public void aDiceShowsAFaceBetweenOneandSix() {
+		Dice dice = new Dice();
+		for (int i = 0; i < 1000; i++) {
+			assert(dice.showFace() >= 1 && dice.showFace() <= 6);
+		}	
+	}
+	
+	@Test
+	public void aCombinaisonHasThreeDices() {
+		Combinaison combinaison = new Combinaison();
+		assertEquals(3, combinaison.getNumberOfDice());
+		assert(combinaison.getDices().get(0) instanceof Dice);
+		assert(combinaison.getDices().get(1) instanceof Dice);
+		assert(combinaison.getDices().get(3) instanceof Dice);
+		assertFalse(combinaison.getName().isEmpty());
+	}
+	
+	@Test
+	public void combinaison421isThebiggest() {
+		Combinaison ununun = Combinaison(1,1,1);
+		Combinaison quatredeuxun = Combinaison(2,1,4);
+		assertTrue(quatredeuxun > ununun);
+	}
+	
+	
+	@Test
+	public void aPlayShouldReturnACombinaison() {
+		Combinaison c = new Game().Play();
+		assertNotEquals(null, c);
+	}
+	
+	
 }
