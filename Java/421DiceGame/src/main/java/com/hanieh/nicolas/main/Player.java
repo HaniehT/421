@@ -19,5 +19,11 @@ public class Player {
 	public int getNumberOfToken() {
 		return numberTokens;
 	}
+	
+	@Override
+	public String toString() {
+		return "Player [name=" + name + ", numberTokens=" + numberTokens + "]";
+	}
+
 
 }

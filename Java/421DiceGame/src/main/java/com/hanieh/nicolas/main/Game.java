@@ -1,14 +1,16 @@
 package com.hanieh.nicolas.main;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.stream.Collectors;
+
 public class Game {
 	
 	private final int MAXTOKEN = 15;
 	
 	private int numberOfTokenDistribut =  MAXTOKEN;
 	private int numberOfUsers;
-	
-	
-	
 
 	public Game () {
 		
@@ -16,13 +18,10 @@ public class Game {
 		Player player2 = new Player("player2");
 		this.numberOfTokenDistribut =  MAXTOKEN;	
 	}
-	
-	
-	
+
 	public Game (Player player1, Player player2) {	
 		this.numberOfTokenDistribut =  MAXTOKEN;	
 		this.numberOfUsers = 2;
-
 	}
 	
 	public Game (Player player1, Player player2, Player player3) {
@@ -38,6 +37,20 @@ public class Game {
 		return numberOfUsers;
 		
 	}
-
+	
+	public List<Dice> Play () {
+		
+		List<Dice> listDices = new ArrayList<>();
+		for (int i=0; i<3 ; i++) {
+			listDices.add(new Dice());	
+		}
+	
+	   listDices.stream().map(i -> i.roll()).collect( Collectors.toList() );
+		
+		return listDices;
+		
+	}
+	
+	 
 
 }
