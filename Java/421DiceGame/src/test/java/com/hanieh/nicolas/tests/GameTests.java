@@ -54,7 +54,6 @@ public class GameTests {
 		
 
 		System.out.println(game.Play());
-
-
+	
 	}
 }
