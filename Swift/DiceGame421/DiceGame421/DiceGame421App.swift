@@ -1,6 +1,6 @@
 //
 //  DiceGame421App.swift
-//  Shared
+//  DiceGame421
 //
 //  Created by Nicolas Savoini on 2020-07-04.
 //

@@ -1,14 +1,14 @@
 //
-//  Tests_macOS.swift
-//  Tests macOS
+//  DiceGame421UITests.swift
+//  DiceGame421UITests
 //
 //  Created by Nicolas Savoini on 2020-07-04.
 //
 
 import XCTest
 
-class Tests_macOS: XCTestCase {
-
+class DiceGame421UITests: XCTestCase {
+/*
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
 
@@ -39,4 +39,5 @@ class Tests_macOS: XCTestCase {
             }
         }
     }
+ */
 }
