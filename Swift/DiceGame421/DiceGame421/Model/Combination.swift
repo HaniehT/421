@@ -24,7 +24,7 @@ extension Combination: Comparable {
         
         let sortSecond = Array(second.values.sorted().reversed())
         let secondString = "\(sortSecond[0])\(sortSecond[1])\(sortSecond[2])"
-
+ 
         for combination in CombinationName.allCases {
             if firstString == combination.rawValue || secondString == combination.rawValue {
                 return !(firstString == combination.rawValue)
