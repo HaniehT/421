@@ -10,6 +10,8 @@ import XCTest
 
 class DiceGame421Tests: XCTestCase {
 
+    let players = [Player(name: "Player1"), Player(name: "Player2")]
+    
     // MARK: DICE
     func testDiceHasSixFaces() {
         let dice = Dice()
@@ -46,25 +48,54 @@ class DiceGame421Tests: XCTestCase {
     
     // MARK: GAME
     func testGameStartWith15TokensToDistribute() {
-        let game = Game()
+        let game = Game(players: players)
         XCTAssertEqual(15, game.tokenToDistribute)
     }
     
     func testGameStartWith0TokenForPlayers() {
-        let game = Game()
+        let game = Game(players: players)
         XCTAssertEqual(2, game.numberOfPlayer)
         XCTAssertEqual(0, game.tokenPlayers[0])
         XCTAssertEqual(0, game.tokenPlayers[1])
     }
     
     func testGameStartWith0TokenForMultiplePlayers() {
-        let game = Game(numberOfPlayer: 5)
-        XCTAssertEqual(5, game.numberOfPlayer)
+        let players3 = [Player(name: "Player1"), Player(name: "Player2"), Player(name: "Player3")]
+        let game = Game(players: players3)
+        XCTAssertEqual(3, game.numberOfPlayer)
         XCTAssertEqual(0, game.tokenPlayers[0])
         XCTAssertEqual(0, game.tokenPlayers[1])
         XCTAssertEqual(0, game.tokenPlayers[2])
-        XCTAssertEqual(0, game.tokenPlayers[3])
-        XCTAssertEqual(0, game.tokenPlayers[4])
+    }
+    
+    func testGameStartPlayerToPlayIs0() {
+        let game = Game(players: players)
+        XCTAssertEqual(0, game.playerToPlay)
+    }
+    
+    // MARK: GAME PHASE 1
+    func testGameStartPhaseOne() {
+        let game = Game(players: players)
+        XCTAssertEqual(Phase.phase1, game.phase)
+        
+    }
+    
+    func testGamePhaseOneAllPlayerPlaysTriggerTokenDistribution() {
+        let game = Game(players: players)
+        game.play()
+        game.play()
+        XCTAssertLessThan(game.tokenToDistribute, 15)
+    }
+    
+    // TODO - Improve this
+    func testGamePhaseOneprint() {
+        let game = Game(players: players)
+        game.play()
+        game.play()
+        print(game.turnCombination)
+        print(game.players)
+        print(game.tokenPlayers)
+        print(game.tokenToDistribute)
     }
     
     // MARK: COMBINATION

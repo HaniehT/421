@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3737321F24B287C70096598B /* Phase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3737321E24B287C70096598B /* Phase.swift */; };
 		375E303224B0DCF4009B1738 /* DiceGame421App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375E303124B0DCF4009B1738 /* DiceGame421App.swift */; };
 		375E303424B0DCF4009B1738 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375E303324B0DCF4009B1738 /* ContentView.swift */; };
 		375E303624B0DCF5009B1738 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 375E303524B0DCF5009B1738 /* Assets.xcassets */; };
@@ -38,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3737321E24B287C70096598B /* Phase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Phase.swift; sourceTree = "<group>"; };
 		375E302E24B0DCF4009B1738 /* DiceGame421.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiceGame421.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		375E303124B0DCF4009B1738 /* DiceGame421App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceGame421App.swift; sourceTree = "<group>"; };
 		375E303324B0DCF4009B1738 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				37FFC4F224B0E83800313B76 /* Game.swift */,
 				37FFC4F424B0EB4C00313B76 /* Combination.swift */,
 				37FFC4F724B0FB6F00313B76 /* CombinationName.swift */,
+				3737321E24B287C70096598B /* Phase.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -310,6 +313,7 @@
 				37FFC4F524B0EB4C00313B76 /* Combination.swift in Sources */,
 				375E305E24B0DD08009B1738 /* Dice.swift in Sources */,
 				375E303224B0DCF4009B1738 /* DiceGame421App.swift in Sources */,
+				3737321F24B287C70096598B /* Phase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

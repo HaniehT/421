@@ -15,23 +15,33 @@ struct Combination {
         values.append(two)
         values.append(three)
     }
+    
+    var reversedString: String {
+        let reversed = Array(values.sorted().reversed())
+        return "\(reversed[0])\(reversed[1])\(reversed[2])"
+    }
+    
+    var knownCombination: CombinationName? {
+        for combination in CombinationName.allCases {
+            if self.reversedString == combination.rawValue {
+                return combination
+            }
+        }
+        return nil
+    }
 }
 
 extension Combination: Comparable {
     static func < (first: Combination, second: Combination) -> Bool {
-        let sortFirst = Array(first.values.sorted().reversed())
-        let firstString = "\(sortFirst[0])\(sortFirst[1])\(sortFirst[2])"
+        let firstString = first.reversedString
+        let secondString = second.reversedString
         
-        let sortSecond = Array(second.values.sorted().reversed())
-        let secondString = "\(sortSecond[0])\(sortSecond[1])\(sortSecond[2])"
- 
         for combination in CombinationName.allCases {
             if firstString == combination.rawValue || secondString == combination.rawValue {
                 return !(firstString == combination.rawValue)
             }
         }
-
+ 
         return firstString < secondString
     }
-    
 }
