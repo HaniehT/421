@@ -98,6 +98,23 @@ class DiceGame421Tests: XCTestCase {
         print(game.tokenToDistribute)
     }
     
+    // TODO - Improve this
+    func testGameFullPhaseOne() {
+        let game = Game(players: players)
+        
+        repeat {
+            game.play()
+            game.play()
+            print(game.turnCombination)
+            print(game.players)
+            print(game.tokenPlayers)
+            print(game.tokenToDistribute)
+        } while game.phase == Phase.phase1
+        
+        XCTAssertEqual(0, game.tokenToDistribute)
+        XCTAssertEqual(15, game.tokenPlayers.reduce(0, +))
+    }
+    
     // MARK: COMBINATION
     func testSortAllCombinations() {
         var combinationNotSorted = [Combination]()
@@ -156,6 +173,33 @@ class DiceGame421Tests: XCTestCase {
             XCTAssertEqual(Combination(one: 4, two: 3, three: 1), combinationSorted[21])
             XCTAssertEqual(Combination(one: 3, two: 1, three: 3), combinationSorted[22])
         }
-        
     }
+    
+    func testCombinationPoint() {
+        XCTAssertEqual(10, CombinationName.c421.getPoints())
+        
+        XCTAssertEqual(7, CombinationName.c111.getPoints())
+        
+        XCTAssertEqual(6, CombinationName.c116.getPoints())
+        XCTAssertEqual(6, CombinationName.c666.getPoints())
+        
+        XCTAssertEqual(5, CombinationName.c115.getPoints())
+        XCTAssertEqual(5, CombinationName.c555.getPoints())
+        
+        XCTAssertEqual(4, CombinationName.c114.getPoints())
+        XCTAssertEqual(4, CombinationName.c444.getPoints())
+        
+        XCTAssertEqual(3, CombinationName.c113.getPoints())
+        XCTAssertEqual(3, CombinationName.c333.getPoints())
+        
+        XCTAssertEqual(2, CombinationName.c112.getPoints())
+        XCTAssertEqual(2, CombinationName.c222.getPoints())
+        
+        XCTAssertEqual(2, CombinationName.c221.getPoints())
+        XCTAssertEqual(2, CombinationName.c123.getPoints())
+        XCTAssertEqual(2, CombinationName.c234.getPoints())
+        XCTAssertEqual(2, CombinationName.c345.getPoints())
+        XCTAssertEqual(2, CombinationName.c456.getPoints())
+    }
+    
 }

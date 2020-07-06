@@ -59,7 +59,6 @@ class Game {
     private func endTurnPhaseOne() {
         let points = min(calculatePointForTheTurn(), tokenToDistribute)
     
-        
         // find index small combination
         let combinationMin = turnCombination.min()!
         let indexMin = turnCombination.firstIndex(of: combinationMin)!
@@ -72,11 +71,10 @@ class Game {
         if tokenToDistribute == 0 {
             phase = Phase.phase2
         }
-        
-        
+         
     }
     
     private func calculatePointForTheTurn() -> Int {
-        return max (turnCombination.map({$0.knownCombination?.getPoints() ?? 0}).reduce(0, +), 1)
+        return max(turnCombination.map({$0.knownCombination?.getPoints() ?? 0}).reduce(0, +), 1)
     }
 }

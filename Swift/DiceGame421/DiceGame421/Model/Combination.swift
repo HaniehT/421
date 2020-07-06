@@ -22,12 +22,7 @@ struct Combination {
     }
     
     var knownCombination: CombinationName? {
-        for combination in CombinationName.allCases {
-            if self.reversedString == combination.rawValue {
-                return combination
-            }
-        }
-        return nil
+        return CombinationName.allCases.first(where: {$0.rawValue == self.reversedString})
     }
 }
 
@@ -35,7 +30,7 @@ extension Combination: Comparable {
     static func < (first: Combination, second: Combination) -> Bool {
         let firstString = first.reversedString
         let secondString = second.reversedString
-        
+
         for combination in CombinationName.allCases {
             if firstString == combination.rawValue || secondString == combination.rawValue {
                 return !(firstString == combination.rawValue)
