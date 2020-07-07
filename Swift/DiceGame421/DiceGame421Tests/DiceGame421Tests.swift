@@ -70,7 +70,7 @@ class DiceGame421Tests: XCTestCase {
     
     func testGameStartPlayerToPlayIs0() {
         let game = Game(players: players)
-        XCTAssertEqual(0, game.playerToPlay)
+        XCTAssertEqual(0, game.playerPlaying)
     }
     
     // MARK: GAME PHASE 1
@@ -98,7 +98,6 @@ class DiceGame421Tests: XCTestCase {
         print(game.tokenToDistribute)
     }
     
-    // TODO - Improve this
     func testGameFullPhaseOne() {
         let game = Game(players: players)
         
@@ -113,6 +112,62 @@ class DiceGame421Tests: XCTestCase {
         
         XCTAssertEqual(0, game.tokenToDistribute)
         XCTAssertEqual(15, game.tokenPlayers.reduce(0, +))
+    }
+    
+    // MARK: GAME PHASE2
+    func testGamePhaseTwoPlayerCanPlayUpToThreeTime() {
+        let game = Game(players: players)
+        
+        //Simulate Phase one result
+        game.tokenToDistribute = 0
+        game.tokenPlayers = [10, 5]
+        game.phase = Phase.phase2
+        
+        game.play()
+        XCTAssertEqual(0, game.playerPlaying)
+        game.play()
+        XCTAssertEqual(0, game.playerPlaying)
+        game.play()
+        XCTAssertEqual(1, game.playerPlaying)
+        
+    }
+    
+    func testGamePhaseTwoPlayerHasACombinationAfterThreeRoll() {
+        let game = Game(players: players)
+        
+        //Simulate Phase one result
+        game.tokenToDistribute = 0
+        game.tokenPlayers = [10, 5]
+        game.phase = Phase.phase2
+        
+        game.play()
+        game.play()
+        game.play()
+        XCTAssertFalse(game.turnCombination.isEmpty)
+        
+    }
+    
+    func testGamePhaseTwoTokenExchangeAfterThreeRolls() {
+        let game = Game(players: players)
+        
+        //Simulate Phase one result
+        game.tokenToDistribute = 0
+        game.tokenPlayers = [10, 5]
+        game.phase = Phase.phase2
+        
+        game.play()
+        game.play()
+        game.play()
+        XCTAssertFalse(game.turnCombination.isEmpty)
+        XCTAssertEqual(1, game.playerPlaying)
+        game.play()
+        game.play()
+        game.play()
+        XCTAssertEqual(0, game.playerPlaying)
+        
+        XCTAssertNotEqual([10, 5], game.tokenPlayers)
+        XCTAssertEqual(15, game.tokenPlayers.reduce(0, +))
+        
     }
     
     // MARK: COMBINATION

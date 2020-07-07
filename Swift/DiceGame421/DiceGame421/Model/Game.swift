@@ -8,30 +8,60 @@
 import Foundation
 
 class Game {
+    
+    private let maxPossibleRollPhaseTwo = 3
+    
     var tokenToDistribute = 15
     var tokenPlayers: [Int]
     
     var numberOfPlayer: Int
     
     var players: [Player]
-    var playerToPlay = 0
+    var playerPlaying = 0
     
     var phase: Phase
     
     private(set) var turnCombination = [Combination]()
     
+    private var rollByPlayer: [Int]
+    
     init(players: [Player]) {
         self.numberOfPlayer = players.count
         self.players = players
         self.phase = Phase.phase1
-        tokenPlayers = Array(repeating: 0, count: numberOfPlayer)
+        self.tokenPlayers = Array(repeating: 0, count: numberOfPlayer)
+        self.rollByPlayer = Array(repeating: 0, count: numberOfPlayer)
     }
     
     func play() {
         
-        if turnCombination.count == numberOfPlayer {
-            turnCombination.removeAll()
+        if phase == Phase.phase1 {
+            if turnCombination.count == numberOfPlayer {
+                turnCombination.removeAll()
+            }
+            
+            turnCombination.append(generateCombination())
+            
+            if turnCombination.count == numberOfPlayer {
+                endTurn()
+            }
         }
+        
+        if phase == Phase.phase2 {
+            rollByPlayer[playerPlaying] += 1
+            
+            if rollByPlayer[playerPlaying] == maxPossibleRollPhaseTwo {
+                turnCombination.append(generateCombination())
+                changePlayer()
+                
+                if turnCombination.count == numberOfPlayer {
+                    endTurn()
+                }
+            }
+        }
+    }
+    
+    private func generateCombination() -> Combination {
         
         var dice = Dice()
         dice.roll()
@@ -41,18 +71,22 @@ class Game {
         dice.roll()
         let valueThree = dice.value
         
-        let combination = Combination(one: valueOne, two: valueTwo, three: valueThree)
-     
-        turnCombination.append(combination)
-        
-        if turnCombination.count == numberOfPlayer {
-            endTurn()
+        return Combination(one: valueOne, two: valueTwo, three: valueThree)
+    }
+    
+    private func changePlayer() {
+        playerPlaying += 1
+        if playerPlaying == numberOfPlayer {
+            playerPlaying = 0
         }
     }
     
     private func endTurn() {
         if phase == Phase.phase1 {
             endTurnPhaseOne()
+        }
+        if phase == Phase.phase2 {
+            endTurnPhaseTwo()
         }
     }
     
@@ -72,6 +106,26 @@ class Game {
             phase = Phase.phase2
         }
          
+    }
+    
+    private func endTurnPhaseTwo() {
+        print(turnCombination)
+        let points = min(calculatePointForTheTurn(), tokenPlayers.max()!)
+    
+        // find index min combination
+        let combinationMin = turnCombination.min()!
+        let indexMin = turnCombination.firstIndex(of: combinationMin)!
+        
+        // Find index mac combination
+        let combinationMax = turnCombination.max()!
+        let indexMax = turnCombination.firstIndex(of: combinationMax)!
+        
+        // Add token to Player Min
+        tokenPlayers[indexMin] += points
+        
+        //Remove token to Player max
+        tokenPlayers[indexMax] -= points
+
     }
     
     private func calculatePointForTheTurn() -> Int {
