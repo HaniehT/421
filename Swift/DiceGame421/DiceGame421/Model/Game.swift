@@ -24,6 +24,7 @@ class Game {
     private(set) var turnCombination = [Combination]()
     
     private var rollByPlayer: [Int]
+    private var maxRollForTheTurn = 0
     
     init(players: [Player]) {
         self.numberOfPlayer = players.count
@@ -34,7 +35,7 @@ class Game {
     }
     
     func play() {
-        
+        print("START PLAY")
         if phase == Phase.phase1 {
             if turnCombination.count == numberOfPlayer {
                 turnCombination.removeAll()
@@ -49,8 +50,12 @@ class Game {
         
         if phase == Phase.phase2 {
             rollByPlayer[playerPlaying] += 1
+            if playerPlaying == 0 {
+                maxRollForTheTurn += 1
+            }
             
-            if rollByPlayer[playerPlaying] == maxPossibleRollPhaseTwo {
+            if rollByPlayer[playerPlaying] == maxPossibleRollPhaseTwo ||
+                (playerPlaying != 0 && rollByPlayer[playerPlaying] == maxRollForTheTurn ) {
                 turnCombination.append(generateCombination())
                 changePlayer()
                 
@@ -58,6 +63,13 @@ class Game {
                     endTurn()
                 }
             }
+        }
+    }
+    
+    func stopRoll() {
+        if phase == Phase.phase2 {
+            turnCombination.append(generateCombination())
+            changePlayer()
         }
     }
     
@@ -109,7 +121,6 @@ class Game {
     }
     
     private func endTurnPhaseTwo() {
-        print(turnCombination)
         let points = min(calculatePointForTheTurn(), tokenPlayers.max()!)
     
         // find index min combination
@@ -125,6 +136,9 @@ class Game {
         
         //Remove token to Player max
         tokenPlayers[indexMax] -= points
+        
+        // Reset number of roll
+        maxRollForTheTurn = 0
 
     }
     

@@ -170,6 +170,36 @@ class DiceGame421Tests: XCTestCase {
         
     }
     
+    func testGamePhaseTwoPlayerCanStopAfterOneTurn() {
+        let game = Game(players: players)
+        
+        //Simulate Phase one result
+        game.tokenToDistribute = 0
+        game.tokenPlayers = [10, 5]
+        game.phase = Phase.phase2
+        
+        game.play()
+        game.stopRoll()
+        
+        XCTAssertEqual(1, game.playerPlaying)
+    }
+    
+    func testGamePhaseTwoNextPlayerWillPlayTheSameNumberOfturn() {
+        let game = Game(players: players)
+        
+        //Simulate Phase one result
+        game.tokenToDistribute = 0
+        game.tokenPlayers = [10, 5]
+        game.phase = Phase.phase2
+        
+        game.play()
+        game.stopRoll()
+        
+        game.play()
+        XCTAssertEqual(0, game.playerPlaying)
+        XCTAssertNotEqual([10, 5], game.tokenPlayers)
+    }
+    
     // MARK: COMBINATION
     func testSortAllCombinations() {
         var combinationNotSorted = [Combination]()
@@ -199,7 +229,7 @@ class DiceGame421Tests: XCTestCase {
         combinationNotSorted.append(Combination(one: 5, two: 2, three: 4))
         combinationNotSorted.append(Combination(one: 1, two: 4, three: 5))
         
-        for _ in (1...2000) {
+        for _ in (1...500) {
             
             combinationNotSorted.shuffle()
             let combinationSorted = Array(combinationNotSorted.sorted().reversed())

@@ -15,6 +15,8 @@
 		375E304424B0DCF5009B1738 /* DiceGame421Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375E304324B0DCF5009B1738 /* DiceGame421Tests.swift */; };
 		375E304F24B0DCF5009B1738 /* DiceGame421UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375E304E24B0DCF5009B1738 /* DiceGame421UITests.swift */; };
 		375E305E24B0DD08009B1738 /* Dice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375E305D24B0DD08009B1738 /* Dice.swift */; };
+		37CDD2F424B658B800FFD069 /* StartGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CDD2F324B658B800FFD069 /* StartGame.swift */; };
+		37CDD2F624B65B3A00FFD069 /* RunningGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CDD2F524B65B3A00FFD069 /* RunningGame.swift */; };
 		37FFC4F124B0E74300313B76 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FFC4F024B0E74300313B76 /* Player.swift */; };
 		37FFC4F324B0E83800313B76 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FFC4F224B0E83800313B76 /* Game.swift */; };
 		37FFC4F524B0EB4C00313B76 /* Combination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FFC4F424B0EB4C00313B76 /* Combination.swift */; };
@@ -53,6 +55,8 @@
 		375E304E24B0DCF5009B1738 /* DiceGame421UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceGame421UITests.swift; sourceTree = "<group>"; };
 		375E305024B0DCF5009B1738 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		375E305D24B0DD08009B1738 /* Dice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dice.swift; sourceTree = "<group>"; };
+		37CDD2F324B658B800FFD069 /* StartGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartGame.swift; sourceTree = "<group>"; };
+		37CDD2F524B65B3A00FFD069 /* RunningGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningGame.swift; sourceTree = "<group>"; };
 		37FFC4F024B0E74300313B76 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		37FFC4F224B0E83800313B76 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		37FFC4F424B0EB4C00313B76 /* Combination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Combination.swift; sourceTree = "<group>"; };
@@ -107,9 +111,9 @@
 		375E303024B0DCF4009B1738 /* DiceGame421 */ = {
 			isa = PBXGroup;
 			children = (
+				37CDD2F124B6587400FFD069 /* App */,
 				375E305C24B0DCFE009B1738 /* Model */,
-				375E303124B0DCF4009B1738 /* DiceGame421App.swift */,
-				375E303324B0DCF4009B1738 /* ContentView.swift */,
+				37CDD2F224B6587D00FFD069 /* View */,
 				375E303524B0DCF5009B1738 /* Assets.xcassets */,
 				375E303A24B0DCF5009B1738 /* Info.plist */,
 				375E303724B0DCF5009B1738 /* Preview Content */,
@@ -154,6 +158,24 @@
 				3737321E24B287C70096598B /* Phase.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		37CDD2F124B6587400FFD069 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				375E303124B0DCF4009B1738 /* DiceGame421App.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		37CDD2F224B6587D00FFD069 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				375E303324B0DCF4009B1738 /* ContentView.swift */,
+				37CDD2F324B658B800FFD069 /* StartGame.swift */,
+				37CDD2F524B65B3A00FFD069 /* RunningGame.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -311,8 +333,10 @@
 				37FFC4F324B0E83800313B76 /* Game.swift in Sources */,
 				375E303424B0DCF4009B1738 /* ContentView.swift in Sources */,
 				37FFC4F524B0EB4C00313B76 /* Combination.swift in Sources */,
+				37CDD2F624B65B3A00FFD069 /* RunningGame.swift in Sources */,
 				375E305E24B0DD08009B1738 /* Dice.swift in Sources */,
 				375E303224B0DCF4009B1738 /* DiceGame421App.swift in Sources */,
+				37CDD2F424B658B800FFD069 /* StartGame.swift in Sources */,
 				3737321F24B287C70096598B /* Phase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
