@@ -98,16 +98,20 @@ class DiceGame421Tests: XCTestCase {
         print(game.tokenToDistribute)
     }
     
+    func testGamePhaseOnePlayerChangeEverytime() {
+        let game = Game(players: players)
+        XCTAssertEqual(0, game.playerPlaying)
+        game.play()
+        XCTAssertEqual(1, game.playerPlaying)
+        game.play()
+        XCTAssertEqual(0, game.playerPlaying)
+    }
+    
     func testGameFullPhaseOne() {
         let game = Game(players: players)
         
         repeat {
             game.play()
-            game.play()
-            print(game.turnCombination)
-            print(game.players)
-            print(game.tokenPlayers)
-            print(game.tokenToDistribute)
         } while game.phase == Phase.phase1
         
         XCTAssertEqual(0, game.tokenToDistribute)
@@ -198,6 +202,20 @@ class DiceGame421Tests: XCTestCase {
         game.play()
         XCTAssertEqual(0, game.playerPlaying)
         XCTAssertNotEqual([10, 5], game.tokenPlayers)
+    }
+    
+    func testGameEndGame() {
+        
+        for _ in 1...100 {
+            let game = Game(players: players)
+            repeat {
+                game.play()
+                XCTAssertTrue(game.tokenPlayers.filter({$0 < 0}).isEmpty)
+            } while !game.isOver
+            
+            XCTAssertTrue(true)
+        }
+        
     }
     
     // MARK: COMBINATION

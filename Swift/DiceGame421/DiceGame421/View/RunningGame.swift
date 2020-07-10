@@ -8,30 +8,31 @@
 import SwiftUI
 
 struct RunningGame: View {
-    
-    @State var game: Game = Game(players: [Player(name: "Richard"), Player(name: "Nicolas")])
-    
-    @State private var dice = Dice()
+    @ObservedObject var controller = GameController()
     
     var body: some View {
         VStack {
 
             playerScore
-            tokenToDistribute
+            
+            if controller.phase == 1 {
+                tokenToDistribute
+            }
             
             HStack {
                 Text("Player Playing:")
                 Spacer()
-                Text("\(game.players[game.playerPlaying].name)").padding()
+                Text(controller.playerPlayingName).padding()
             }
             Divider()
            
             HStack {
-                Text("D1")
                 
-                Text("D2")
-                
-                Text("\(dice.value)")
+                Text(("\(controller.combimation?.values[0] ?? 0)"))
+                    
+                Text(("\(controller.combimation?.values[1] ?? 0)"))
+
+                Text(("\(controller.combimation?.values[2] ?? 0)"))
                 
             }
             Divider()
@@ -39,18 +40,17 @@ struct RunningGame: View {
             HStack {
                 Spacer()
                 Button(action: {
-                    game.play()
-                    
+                    controller.play()
                 }) {
                     Text("Roll")
                 }
                 Spacer()
                 
-                //if game.phase == Phase.phase2 {
-                Button(action: {dice.roll()}) {
-                        Text("Stop")
-                    }
-                //}
+                if controller.phase == 2 {
+                    Button(action: {controller.stopRoll()}) {
+                            Text("Stop")
+                        }
+                }
                 
                 Spacer()
             }
@@ -66,15 +66,15 @@ struct RunningGame: View {
             HStack {
                 Spacer()
                 VStack {
-                    Text(game.players[0].name)
-                    Text("\(game.tokenPlayers[0])")
+                    Text("Richard")
+                    Text("\(controller.tokenPlayer0)")
                 }.padding()
                 
                 Spacer()
                 
                 VStack {
-                    Text(game.players[1].name)
-                    Text("\(game.tokenPlayers[1])")
+                    Text("Nicolas")
+                    Text("\(controller.tokenPlayer1)")
                 }.padding()
                 
                 Spacer()
@@ -89,7 +89,7 @@ struct RunningGame: View {
             HStack {
                 Text("Token To Distribute:")
                 Spacer()
-                Text("\(game.tokenToDistribute)").padding()
+                Text("\(controller.tokenToDistribute)").padding()
             }
             Divider()
         }

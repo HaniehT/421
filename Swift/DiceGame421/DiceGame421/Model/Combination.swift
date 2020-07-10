@@ -8,7 +8,7 @@
 import Foundation
 
 struct Combination {
-    private var values = [Int]()
+    var values = [Int]()
     
     init(one: Int, two: Int, three: Int) {
         values.append(one)
