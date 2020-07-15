@@ -204,6 +204,39 @@ class DiceGame421Tests: XCTestCase {
         XCTAssertNotEqual([10, 5], game.tokenPlayers)
     }
     
+    func testGamePhaseTwoPickDiceNotToRelaunch() {
+        let game = Game(players: players)
+        
+        //Simulate Phase one result
+        game.tokenToDistribute = 0
+        game.tokenPlayers = [10, 5]
+        game.phase = Phase.phase2
+        
+        game.play()
+        let lastLaunchZero = game.lastlaunch.values[0]
+        game.keepNumber(numbers: [lastLaunchZero])
+        game.play()
+        XCTAssertEqual(lastLaunchZero, game.lastlaunch.values[0])
+    }
+    
+    func testGamePhaseTwoPickDicesNotToRelaunch() {
+        let game = Game(players: players)
+        
+        //Simulate Phase one result
+        game.tokenToDistribute = 0
+        game.tokenPlayers = [10, 5]
+        game.phase = Phase.phase2
+        
+        game.play()
+        let lastLaunchZero = game.lastlaunch.values[0]
+        let lastLaunchTwo = game.lastlaunch.values[2]
+        game.keepNumber(numbers: [lastLaunchZero, lastLaunchTwo])
+        game.play()
+        XCTAssertEqual(lastLaunchZero, game.lastlaunch.values[0])
+        XCTAssertEqual(lastLaunchTwo, game.lastlaunch.values[1])
+    }
+      
+    // MARK: END GAME
     func testGameEndGame() {
         
         for _ in 1...100 {

@@ -28,31 +28,54 @@ struct RunningGame: View {
            
             HStack {
                 
-                Text(("\(controller.combimation?.values[0] ?? 0)"))
-                    
-                Text(("\(controller.combimation?.values[1] ?? 0)"))
-
-                Text(("\(controller.combimation?.values[2] ?? 0)"))
+                Button(action: {
+                    controller.keepNumber(position: 0)
+                }, label: {
+                    Text("\(controller.combimation?.values[0] ?? 0)")
+                        .foregroundColor(.green)
+                }).padding(.horizontal, /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
                 
+                Button(action: {
+                    controller.keepNumber(position: 1)
+                }, label: {
+                    Text("\(controller.combimation?.values[1] ?? 0)")
+                        .foregroundColor(.green)
+                }).padding(.horizontal, /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
+                
+                Button(action: {
+                    controller.keepNumber(position: 2)
+                }, label: {
+                    Text("\(controller.combimation?.values[2] ?? 0)")
+                        .foregroundColor(.green)
+                }).padding(.horizontal, /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
+
             }
             Divider()
             
-            HStack {
-                Spacer()
-                Button(action: {
-                    controller.play()
-                }) {
-                    Text("Roll")
-                }
-                Spacer()
+            if !controller.endGame {
+                HStack {
+                    Spacer()
+                    
+                    Button(action: {
+                        controller.play()
+                    }) {
+                        Text("Roll")
+                    }
                 
-                if controller.phase == 2 {
-                    Button(action: {controller.stopRoll()}) {
-                            Text("Stop")
-                        }
+                    if controller.phase == 2 {
+                        Spacer()
+                        Button(action: {controller.stopRoll()}) {
+                                Text("Stop")
+                            }
+                    }
+                    
+                    Spacer()
                 }
-                
-                Spacer()
+            } else {
+                VStack {
+                    Text("Game Over")
+                    Text("Winner \(controller.tokenPlayer0 == 0 ? "Richard" : "Nicolas")")
+                }
             }
             
             Spacer()

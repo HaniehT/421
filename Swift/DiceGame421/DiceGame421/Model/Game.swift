@@ -24,6 +24,9 @@ class Game {
     
     private(set) var turnCombination = [Combination]()
     
+    var lastlaunch = Combination(one: 1, two: 1, three: 1)
+    var numberkept = [Int]()
+    
     private var rollByPlayer: [Int]
     private var maxRollForTheTurn = 0
     
@@ -47,13 +50,16 @@ class Game {
         if phase == Phase.phase1 {
             logger.info("--- Phase 1")
             
-            if turnCombination.count == numberOfPlayer {
-                logger.info("New turn, we remove all previous turn combination")
-                turnCombination.removeAll()
-            }
+            emptyTurnCombinationIfNecessary()
             
-            turnCombination.append(generateCombination())
+            let combination = generateCombination()
+            lastlaunch = combination
+            turnCombination.append(combination)
+            
+            logger.info("dices are: \(combination.values)")
+            
             changePlayer()
+            
             if turnCombination.count == numberOfPlayer {
                 endTurn()
             }
@@ -61,10 +67,11 @@ class Game {
         } else if phase == Phase.phase2 {
             logger.info("--- Phase 2")
             
-            if turnCombination.count == numberOfPlayer {
-                logger.info("New turn, we remove all previous turn combination")
-                turnCombination.removeAll()
-            }
+            emptyTurnCombinationIfNecessary()
+            
+            lastlaunch = generateCombination(numbers: numberkept)
+            
+            numberkept.removeAll()
             
             rollByPlayer[playerPlaying] += 1
             logger.info("Player is in its \(self.rollByPlayer[self.playerPlaying]) roll")
@@ -77,7 +84,7 @@ class Game {
             if rollByPlayer[playerPlaying] == maxPossibleRollPhaseTwo ||
                 (playerPlaying != 0 && rollByPlayer[playerPlaying] == maxRollForTheTurn ) {
                 
-                turnCombination.append(generateCombination())
+                turnCombination.append(lastlaunch)
                 changePlayer()
                 logger.info("We change Player")
                 
@@ -90,14 +97,34 @@ class Game {
         }
     }
     
-    func stopRoll() {
+    private func emptyTurnCombinationIfNecessary() {
+        if turnCombination.count == numberOfPlayer {
+            logger.info("New turn, we remove all previous turn combination")
+            turnCombination.removeAll()
+        }
+    }
+    
+    func keepNumber(numbers: [Int]) {
         if phase == Phase.phase2 {
-            turnCombination.append(generateCombination())
+            logger.info("We keept the number \(numbers)")
+            numberkept.append(contentsOf: numbers)
+        }
+    }
+    
+    func stopRoll() {
+        guard !isOver else {
+            return
+        }
+        
+        numberkept.removeAll()
+        
+        if phase == Phase.phase2 && rollByPlayer[playerPlaying] > 0 {
+            turnCombination.append(lastlaunch)
             changePlayer()
         }
     }
     
-    private func generateCombination() -> Combination {
+    private func generateCombination(numbers: [Int] = [Int]()) -> Combination {
         var dice = Dice()
         dice.roll()
         let valueOne = dice.value
@@ -106,14 +133,25 @@ class Game {
         dice.roll()
         let valueThree = dice.value
         
+        // The dice kept are always in first position
+        if numbers.count == 1 {
+            return Combination(one: numbers[0], two: valueTwo, three: valueThree)
+        }
+        
+        if numbers.count == 2 {
+            return Combination(one: numbers[0], two: numbers[1], three: valueThree)
+        }
+        
         return Combination(one: valueOne, two: valueTwo, three: valueThree)
     }
     
     private func changePlayer() {
+        logger.info("player playing before: \(self.playerPlaying)")
         playerPlaying += 1
         if playerPlaying == numberOfPlayer {
             playerPlaying = 0
         }
+        logger.info("player playing after: \(self.playerPlaying)")
     }
     
     private func endTurn() {
@@ -182,6 +220,9 @@ class Game {
         // Reset number of roll
         maxRollForTheTurn = 0
         self.rollByPlayer = Array(repeating: 0, count: numberOfPlayer)
+        
+        // Reset number kept
+        numberkept.removeAll()
         
         //Detect End Game
         if tokenPlayers.contains(0) {

@@ -21,6 +21,8 @@ class GameController: ObservableObject {
     @Published var combimation: Combination?
     
     @Published var phase = 1
+    
+    @Published var endGame = false
         
     init() {
         game = Game(players: [Player(name: "Richard"), Player(name: "Nicolas")])
@@ -31,13 +33,18 @@ class GameController: ObservableObject {
         update()
     }
     
+    func keepNumber(position: Int) {
+        game.keepNumber(numbers: [game.lastlaunch.values[position]])
+    }
+    
     func stopRoll() {
         game.stopRoll()
         update()
     }
     
     private func update() {
-        combimation = game.turnCombination.last
+        //combimation = game.turnCombination.last
+        combimation = game.lastlaunch
         tokenPlayer0 = game.tokenPlayers[0]
         tokenPlayer1 = game.tokenPlayers[1]
         tokenToDistribute = game.tokenToDistribute
@@ -45,6 +52,7 @@ class GameController: ObservableObject {
         if game.phase == Phase.phase2 {
             phase = 2
         }
+        endGame = game.isOver
     }
     
 }
