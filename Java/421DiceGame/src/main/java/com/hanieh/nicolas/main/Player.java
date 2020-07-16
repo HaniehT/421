@@ -20,6 +20,10 @@ public class Player {
 		return numberTokens;
 	}
 	
+	public void setNumberOfToken(int newNumberToken) {
+		this.numberTokens += newNumberToken;
+	}
+	
 	@Override
 	public String toString() {
 		return "Player [name=" + name + ", numberTokens=" + numberTokens + "]";
