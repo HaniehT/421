@@ -11,8 +11,12 @@ public class Game {
 
 	private int numberOfTokenDistribut =  MAXTOKEN;
 	private int numberOfUsers;
+	private List <Integer> listValueDiceKept =  new ArrayList<>();
 	Player player1 = new Player("Player One");
 	Player player2 = new Player("Player Deux");
+	private int countPlay = 0;
+	private Combinaison combinaisonPlayer1;
+	private Combinaison combinaisonPlayer2;
 
 
 	public Game () {
@@ -52,11 +56,26 @@ public class Game {
 		return  new Combinaison(valueDices.get(0), valueDices.get(1), valueDices.get(2));
 	}
 
+	private Combinaison playOneTurnByValueDiceKnown (List<Integer> dicesKnown) {
+		Dice dice = new Dice();
+
+		if (dicesKnown.size() == 1) {
+			return new Combinaison (dicesKnown.get(0),dice.roll(),dice.roll());
+		}
+
+		if (dicesKnown.size() == 2) {
+			return new Combinaison (dicesKnown.get(0),dicesKnown.get(1),dice.roll());
+		}
+
+		if (dicesKnown.size() == 3) {
+			return new Combinaison (dicesKnown.get(0),dicesKnown.get(1),dicesKnown.get(2));
+		}
+
+		return playOneTurnPhaseOne ();
+	}
+
 	public void launchTurnPhaseOne() {
 		int numberToken = 0;
-
-		//CombinaisonNames combinaisonName;
-
 
 		//player1 rolls dice
 
@@ -101,7 +120,7 @@ public class Game {
 
 			System.out.println("combinaison1 est others et combinaison2 est une combinason  = " + numberToken );
 
-	
+
 			System.out.println("numberOfTokenDistribut " + numberOfTokenDistribut);
 
 
@@ -124,7 +143,7 @@ public class Game {
 			}
 
 			System.out.println("combinaison1 est une combinaison et combinaison2 est others  = " + numberToken );
-		
+
 			System.out.println("numberOfTokenDistribut " + numberOfTokenDistribut);
 
 
@@ -151,7 +170,7 @@ public class Game {
 
 
 				System.out.println("combinaison2 est plus grand = " + numberToken );
-		
+
 				System.out.println("numberOfTokenDistribut " + numberOfTokenDistribut);
 
 			} 
@@ -188,12 +207,9 @@ public class Game {
 			player1.setNumberOfToken(numberToken);
 			System.out.println("combinaison1 et 2  est sont egaux = " + numberToken );
 
-
 		} 
 
 		 */
-
-
 
 		if (methodeCompare.compare(combinaisonPlayer1.combinaisonToEnum(),CombinaisonNames.OTHERS) == 0 && methodeCompare.compare(combinaisonPlayer2.combinaisonToEnum(),CombinaisonNames.OTHERS) == 0 ) {
 
@@ -207,18 +223,15 @@ public class Game {
 					this.numberOfTokenDistribut = this.numberOfTokenDistribut - numberOfTokenDistribut;
 
 				} else {
-					
+
 					player2.setNumberOfToken(numberToken);
 					this.numberOfTokenDistribut = this.numberOfTokenDistribut - numberToken;
 
 				}
 
-
 				System.out.println("combinaison1 est others et combinaison2 est others mais player1 est plus grand  = " + numberToken );
 				this.numberOfTokenDistribut --;
 				System.out.println("numberOfTokenDistribut " + numberOfTokenDistribut);
-
-
 
 
 			} else {
@@ -244,7 +257,6 @@ public class Game {
 		System.out.println(numberToken);
 		System.out.println("Nomre de Token player1 = " + player1.getNumberOfToken());
 		System.out.println("Nomre de Token player2 = " + player2.getNumberOfToken());
-
 	}
 
 
@@ -269,6 +281,48 @@ public class Game {
 		return this.numberOfTokenDistribut == 0;
 
 	}
+
+	public boolean replay () {
+		return true;
+	}
+
+	public void keepDice (int valueDiceKept) {
+
+		listValueDiceKept.add(valueDiceKept);		
+	}
+
+	public List <Combinaison>  rollPhase2Player1 () {
+
+	
+		List <Combinaison> listCombinasonsTwoPlayers = new ArrayList<>();
+
+		combinaisonPlayer1 = playOneTurnByValueDiceKnown(listValueDiceKept);
+		countPlay ++;
+
+		listValueDiceKept.clear();
+		if (countPlay == 3) {
+			
+			combinaisonPlayer2 = rollPhase2Player2 (countPlay);
+
+		}
+		listCombinasonsTwoPlayers.add(combinaisonPlayer1);
+		listCombinasonsTwoPlayers.add(combinaisonPlayer2);
+		
+		return listCombinasonsTwoPlayers ;
+	}
+
+	public Combinaison rollPhase2Player2 (int numberTimesOfRollDice) {
+
+		
+
+		for (int i=0; i < numberTimesOfRollDice; i++) {	
+			combinaisonPlayer2 = playOneTurnByValueDiceKnown(listValueDiceKept);
+		}
+		
+		return combinaisonPlayer2;
+	}
+
+	
 
 
 }
