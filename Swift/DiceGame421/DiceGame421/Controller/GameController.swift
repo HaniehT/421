@@ -33,6 +33,7 @@ class GameController: ObservableObject {
         update()
     }
     
+    // TODO NOT WORKING - Force keep only two
     func keepNumber(position: Int) {
         game.keepNumber(numbers: [game.lastlaunch.values[position]])
     }

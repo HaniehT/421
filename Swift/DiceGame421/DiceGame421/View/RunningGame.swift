@@ -62,6 +62,7 @@ struct RunningGame: View {
                         Text("Roll")
                     }
                 
+                    // TODO - DONT display STOP button for player 2
                     if controller.phase == 2 {
                         Spacer()
                         Button(action: {controller.stopRoll()}) {

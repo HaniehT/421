@@ -98,6 +98,29 @@ class DiceGame421Tests: XCTestCase {
         print(game.tokenToDistribute)
     }
     
+    #if DEBUG
+    func testGamePhaseOneFirstPlay() {
+        let game = Game(players: players)
+        game.playDebug(combination: Combination(one: 3, two: 2, three: 5))
+        game.playDebug(combination: Combination(one: 4, two: 4, three: 5))
+        XCTAssertEqual(1, game.tokenPlayers[0])
+        XCTAssertEqual(0, game.tokenPlayers[1])
+        XCTAssertEqual(14, game.tokenToDistribute)
+    }
+    #endif
+    
+    #if DEBUG
+    func testGamePhaseOneDirectEndGame() {
+        let game = Game(players: players)
+        game.playDebug(combination: Combination(one: 4, two: 2, three: 1))
+        game.playDebug(combination: Combination(one: 1, two: 1, three: 1))
+        XCTAssertEqual(0, game.tokenPlayers[0])
+        XCTAssertEqual(15, game.tokenPlayers[1])
+        XCTAssertEqual(0, game.tokenToDistribute)
+        XCTAssertTrue(game.isOver)
+    }
+    #endif
+
     func testGamePhaseOnePlayerChangeEverytime() {
         let game = Game(players: players)
         XCTAssertEqual(0, game.playerPlaying)
@@ -235,6 +258,8 @@ class DiceGame421Tests: XCTestCase {
         XCTAssertEqual(lastLaunchZero, game.lastlaunch.values[0])
         XCTAssertEqual(lastLaunchTwo, game.lastlaunch.values[1])
     }
+    
+    
       
     // MARK: END GAME
     func testGameEndGame() {

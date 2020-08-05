@@ -16,6 +16,7 @@
 		375E304F24B0DCF5009B1738 /* DiceGame421UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375E304E24B0DCF5009B1738 /* DiceGame421UITests.swift */; };
 		375E305E24B0DD08009B1738 /* Dice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375E305D24B0DD08009B1738 /* Dice.swift */; };
 		3773235124B8E9C000EDBEB8 /* GameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3773235024B8E9C000EDBEB8 /* GameController.swift */; };
+		37BA92A324BFCDB00099CA92 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37BA92A224BFCDB00099CA92 /* GameKit.framework */; };
 		37CDD2F424B658B800FFD069 /* StartGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CDD2F324B658B800FFD069 /* StartGame.swift */; };
 		37CDD2F624B65B3A00FFD069 /* RunningGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CDD2F524B65B3A00FFD069 /* RunningGame.swift */; };
 		37FFC4F124B0E74300313B76 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FFC4F024B0E74300313B76 /* Player.swift */; };
@@ -57,6 +58,7 @@
 		375E305024B0DCF5009B1738 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		375E305D24B0DD08009B1738 /* Dice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dice.swift; sourceTree = "<group>"; };
 		3773235024B8E9C000EDBEB8 /* GameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameController.swift; sourceTree = "<group>"; };
+		37BA92A224BFCDB00099CA92 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		37CDD2F324B658B800FFD069 /* StartGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartGame.swift; sourceTree = "<group>"; };
 		37CDD2F524B65B3A00FFD069 /* RunningGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningGame.swift; sourceTree = "<group>"; };
 		37FFC4F024B0E74300313B76 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37BA92A324BFCDB00099CA92 /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,6 +100,7 @@
 				375E304224B0DCF5009B1738 /* DiceGame421Tests */,
 				375E304D24B0DCF5009B1738 /* DiceGame421UITests */,
 				375E302F24B0DCF4009B1738 /* Products */,
+				37BA92A124BFCDB00099CA92 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -169,6 +173,14 @@
 				3773235024B8E9C000EDBEB8 /* GameController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		37BA92A124BFCDB00099CA92 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				37BA92A224BFCDB00099CA92 /* GameKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		37CDD2F124B6587400FFD069 /* App */ = {

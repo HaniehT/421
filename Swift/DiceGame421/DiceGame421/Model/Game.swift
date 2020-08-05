@@ -40,19 +40,31 @@ class Game {
         self.rollByPlayer = Array(repeating: 0, count: numberOfPlayer)
     }
     
+    #if DEBUG
+    func playDebug(combination: Combination) {
+        playCombination(combination: combination)
+    }
+    #endif
+    
     func play() {
+        playCombination(combination: generateCombination())
+    }
+
+    
+    private func playCombination(combination: Combination) {
         
         guard !isOver else {
             return
         }
         
+        let combination = combination
+ 
         logger.info("--- Start Play")
         if phase == Phase.phase1 {
             logger.info("--- Phase 1")
             
             emptyTurnCombinationIfNecessary()
-            
-            let combination = generateCombination()
+
             lastlaunch = combination
             turnCombination.append(combination)
             
@@ -108,6 +120,7 @@ class Game {
         if phase == Phase.phase2 {
             logger.info("We keept the number \(numbers)")
             numberkept.append(contentsOf: numbers)
+            logger.info("all number kept \(self.numberkept)")
         }
     }
     
@@ -185,6 +198,7 @@ class Game {
             
             //Detect End Game
             if tokenPlayers.contains(0) {
+                logger.info("End Game detected")
                 isOver = true
             }
             
